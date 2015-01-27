@@ -14,6 +14,7 @@
 		3DC7ECC21A6E04EF007A324A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DC7ECC11A6E04EF007A324A /* Images.xcassets */; };
 		3DC7ECC51A6E04EF007A324A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DC7ECC31A6E04EF007A324A /* LaunchScreen.xib */; };
 		3DC7ECD11A6E04EF007A324A /* RPSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC7ECD01A6E04EF007A324A /* RPSTests.m */; };
+		3DC7ECDC1A6E12C8007A324A /* rpsBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC7ECDB1A6E12C8007A324A /* rpsBrain.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		3DC7ECCA1A6E04EF007A324A /* RPSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RPSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DC7ECCF1A6E04EF007A324A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DC7ECD01A6E04EF007A324A /* RPSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RPSTests.m; sourceTree = "<group>"; };
+		3DC7ECDA1A6E12C8007A324A /* rpsBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rpsBrain.h; sourceTree = "<group>"; };
+		3DC7ECDB1A6E12C8007A324A /* rpsBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rpsBrain.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,8 @@
 				3DC7ECB91A6E04EF007A324A /* AppDelegate.m */,
 				3DC7ECBB1A6E04EF007A324A /* ViewController.h */,
 				3DC7ECBC1A6E04EF007A324A /* ViewController.m */,
+				3DC7ECDA1A6E12C8007A324A /* rpsBrain.h */,
+				3DC7ECDB1A6E12C8007A324A /* rpsBrain.m */,
 				3DC7ECBE1A6E04EF007A324A /* Main.storyboard */,
 				3DC7ECC11A6E04EF007A324A /* Images.xcassets */,
 				3DC7ECC31A6E04EF007A324A /* LaunchScreen.xib */,
@@ -221,6 +226,7 @@
 			files = (
 				3DC7ECBD1A6E04EF007A324A /* ViewController.m in Sources */,
 				3DC7ECBA1A6E04EF007A324A /* AppDelegate.m in Sources */,
+				3DC7ECDC1A6E12C8007A324A /* rpsBrain.m in Sources */,
 				3DC7ECB71A6E04EF007A324A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
