@@ -30,7 +30,7 @@
     [history addObject:data];
     for (int i=1;i<MIN([history count],THRESHOLD);i++){
 //        NSLog(@"%i, %i, %i",[total[i]])
-        total[i]=[NSNumber numberWithInteger:[total[i] integerValue]+1];//issue here
+        total[i]=[NSNumber numberWithInteger:[total[i] integerValue]+1];//issue here probably
         NSString *keyString = [[history subarrayWithRange:NSMakeRange(history.count - (1+i), i)]description];
         if ([greyMatter objectForKey:keyString]) {
 
