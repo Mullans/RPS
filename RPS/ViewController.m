@@ -41,6 +41,7 @@
          forControlEvents:UIControlEventTouchUpInside];
     [rockButton setTitle:@"Rock" forState:UIControlStateNormal];
     rockButton.frame = CGRectMake(80.0, 210.0, 160.0, 40.0);
+    [rockButton sizeToFit];
     [rockButton setCenter:CGPointMake(screenSize.size.width*.25, screenSize.size.height*0.8)];
     [self.view addSubview:rockButton];
     
@@ -50,6 +51,7 @@
          forControlEvents:UIControlEventTouchUpInside];
     [paperButton setTitle:@"Paper" forState:UIControlStateNormal];
     paperButton.frame = CGRectMake(80.0, 210.0, 160.0, 40.0);
+    [paperButton sizeToFit];
     [paperButton setCenter:CGPointMake(screenSize.size.width*.5, screenSize.size.height*0.8)];
     [self.view addSubview:paperButton];
     
@@ -59,6 +61,7 @@
          forControlEvents:UIControlEventTouchUpInside];
     [scissorsButton setTitle:@"Scissors" forState:UIControlStateNormal];
     scissorsButton.frame = CGRectMake(80.0, 210.0, 160.0, 40.0);
+    [scissorsButton sizeToFit];
     [scissorsButton setCenter:CGPointMake(screenSize.size.width*.75, screenSize.size.height*0.8)];
     [self.view addSubview:scissorsButton];
     
@@ -88,10 +91,8 @@
         NSLog(@"Scissors Button");
         choice = 2;
     }
-    int npcChoice = [motherBrain getChoice];
-    NSLog(@"ncp Choice %i",npcChoice);
-    [motherBrain addToBrain:choice];//issue here?
-    NSLog(@"getting here?");
+    int npcChoice = [motherBrain getChoice];//issue here
+    [motherBrain addToBrain:choice];
     computerChoice.text = choices[npcChoice];
     [computerChoice sizeToFit];
     [computerChoice setCenter:CGPointMake(screenSize.size.width/2, screenSize.size.height/2)];

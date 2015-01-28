@@ -29,12 +29,12 @@
     int issueNum=0;
     [history addObject:data];
     for (int i=1;i<MIN([history count],THRESHOLD);i++){
-//        NSLog(@"%i, %i, %i",[total[i]])
-        total[i]=[NSNumber numberWithInteger:[total[i] integerValue]+1];//issue here probably
-        NSString *keyString = [[history subarrayWithRange:NSMakeRange(history.count - (1+i), i)]description];
+        total[i]=[NSNumber numberWithFloat:[total[i] integerValue]+1];//issue here probably
+//        NSString *keyString = [[history subarrayWithRange:NSMakeRange(history.count - (1+i), i)]description];
+        NSString *keyString = [[[history subarrayWithRange:NSMakeRange(history.count - (1+i), i)] valueForKey:@"description"] componentsJoinedByString:@""];
         if ([greyMatter objectForKey:keyString]) {
 
-            NSInteger current = [[greyMatter valueForKey:keyString] integerValue]+1;
+            NSInteger current = [[greyMatter valueForKey:keyString] floatValue]+1;
             [greyMatter setValue:[NSNumber numberWithInteger:current] forKey:keyString];
             
         }else{
@@ -45,34 +45,54 @@
 }
 
 -(int)getChoice{
-    NSLog(@"AMAZING");
     if ([history count]>2){
-        NSLog(@"issue0");
         NSMutableArray *choiceArray = [[NSMutableArray alloc]initWithCapacity:THRESHOLD*3];
-        NSLog(@"issue2");
+        for(int i=0; i<THRESHOLD*3;i++){
+            [choiceArray addObject:[NSNumber numberWithFloat:0]];
+        }
         //create array of values
-        NSLog(@"issue in here?");
-        for (int i = 0; i<MIN([history count],THRESHOLD);i++){
+        for (int i = 0; i<MIN([history count],THRESHOLD-1);i++){
             NSArray *baseArray = [history subarrayWithRange:NSMakeRange(history.count - (1+i), i)];
             for (int j=0;j<3;j++){
-                @autoreleasepool {
-                    NSMutableArray *temp = [[NSMutableArray alloc]initWithArray:baseArray];
-                    [temp addObject:[NSNumber numberWithInt:j]];
-                    NSString *keyString = [temp description];
-                    choiceArray[i+(j*THRESHOLD)]= [NSNumber numberWithFloat:([[greyMatter objectForKey:keyString]floatValue]/[total[i]floatValue])];
+                NSMutableArray *temp = [[NSMutableArray alloc]initWithArray:baseArray];
+                [temp addObject:[NSNumber numberWithInt:j]];
+//                NSString *keyString = [temp description];
+                NSString *keyString = [[temp valueForKey:@"description"] componentsJoinedByString:@""];
+                float storedValue = [[greyMatter objectForKey:keyString]floatValue];
+                int divisor = [total[i+1]intValue];
+                if (divisor==0){
+                    choiceArray[i+(j*THRESHOLD)] = [NSNumber numberWithFloat:0];
+                }else{
+                    choiceArray[i+(j*THRESHOLD)]= [NSNumber numberWithFloat:(storedValue/divisor)];
                 }
             }
         }
-        int rock = 0;
-        int paper = 0;
-        int scissors = 0;
+        float rock = 0;
+        float paper = 0;
+        float scissors = 0;
+        float one = 1;
         for (int i=0;i<THRESHOLD;i++){
-            rock += (1/THRESHOLD)*[choiceArray[i]floatValue];
-            paper += (1/THRESHOLD)*[choiceArray[i+1*THRESHOLD]floatValue];
-            scissors += (1/THRESHOLD)*[choiceArray[i+2*THRESHOLD]floatValue];
+            float j = (float)(i+1);
+            NSLog(@"i %i r %f p %f s %f",i,(one/THRESHOLD)*[choiceArray[i]floatValue],(one/THRESHOLD)*[choiceArray[i+1*THRESHOLD]floatValue],(one/THRESHOLD)*[choiceArray[i+2*THRESHOLD]floatValue]);
+            rock += j*(one/THRESHOLD)*[choiceArray[i]floatValue];
+            paper += j*(one/THRESHOLD)*[choiceArray[i+1*THRESHOLD]floatValue];
+            scissors += j*(one/THRESHOLD)*[choiceArray[i+2*THRESHOLD]floatValue];
         }
-        int likelyPlayerChoice = MAX(MAX(rock,paper),scissors);
-        return ((likelyPlayerChoice+1)%3);
+        NSLog(@"r %f p %f s %f",rock,paper,scissors);
+        int likelyPlayerChoice = (int)MAX(MAX(rock,paper),scissors);
+        if (rock>paper){
+            if (rock>scissors){
+                return 1;
+            }else{
+                return 0;
+            }
+        }else{
+            if (paper>scissors){
+                return 2;
+            }else{
+                return 0;
+            }
+        }
     }else if([history count]==1){
         return ([history[0]integerValue]+1)%3;
     }else{
