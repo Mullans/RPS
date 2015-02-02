@@ -14,10 +14,14 @@
     NSArray *results;
     UILabel *resultLabel;
     UILabel *computerChoice;
+    UILabel *scoreLabel;
     UIButton *rockButton;
     UIButton *paperButton;
     UIButton *scissorsButton;
     rpsBrain *motherBrain;
+    
+    int wins;
+    int losses;
     
     CGRect screenSize;
     

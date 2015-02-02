@@ -21,6 +21,9 @@
     choices = @[@"Rock",@"Paper",@"Scissors"];
     results = @[@"Tie",@"NPC Wins",@"You Win"];
     
+    wins = 0;
+    losses = 0;
+    
     motherBrain = [[rpsBrain alloc]init];
     
     resultLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
@@ -28,6 +31,12 @@
     [resultLabel sizeToFit];
     [resultLabel setCenter:CGPointMake(screenSize.size.width/2, screenSize.size.height/5)];
     [self.view addSubview:resultLabel];
+    
+    scoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
+    [scoreLabel setText:@"0 Wins      0 Losses"];
+    [scoreLabel sizeToFit];
+    [scoreLabel setCenter:CGPointMake(screenSize.size.width/2, screenSize.size.height/2+20)];
+    [self.view addSubview:scoreLabel];
     
     computerChoice = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
     [computerChoice setText:@"Computer is waiting..."];
@@ -98,6 +107,12 @@
     [computerChoice setCenter:CGPointMake(screenSize.size.width/2, screenSize.size.height/2)];
     
     int result = [self winner:npcChoice :choice];
+    if (result==2){wins++;}
+    if (result==1){losses++;}
+    scoreLabel.text = [NSString stringWithFormat:@"%i Wins      %i Losses",wins,losses];
+    [scoreLabel sizeToFit];
+    [scoreLabel setCenter:CGPointMake(screenSize.size.width/2, screenSize.size.height/2+20)];
+    
     resultLabel.text = results[result];
     [resultLabel sizeToFit];
     [resultLabel setCenter:CGPointMake(screenSize.size.width/2, screenSize.size.height/5)];
